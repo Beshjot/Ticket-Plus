@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${movie.title}">Template Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div id="shell">
+    <!-- Header -->
+    <div id="header">
+        <h1 id="logo"><a href="/">Ticket Plus</a></h1>
+        <!-- Navigation -->
+        <div id="navigation">
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/news">NEWS</a></li>
+                <li><a href="/cart">CART</a></li>
+            </ul>
+        </div>
+        <!-- end Navigation -->
+
+        <!-- Sub-menu -->
+        <div id="sub-navigation">
+            <ul>
+                <li><a href="/">SHOW ALL</a></li>
+                <!--<li><a href="#">MOST COMMENTED</a></li>-->
+            </ul>
+            <div id="search">
+                <form action="search" method="get" accept-charset="utf-8">
+                    <label for="search">SEARCH</label>
+                    <input type="text" name="search" value="Enter search here" id="search" title="Enter search here" class="blink search-field"  />
+                    <input type="submit" value="GO!" class="search-button" />
+                </form>
+            </div>
+        </div>
+        <!-- end Sub-Menu -->
+
+    </div>
+    <!-- end Header -->
+
+    <!-- Main -->
+    <div id="main">
+        <!-- Content -->
+        <div id="content">
+            <h1 th:text="${movie.title}"></h1>
+            <img th:src="${movie.image}" th:alt="${movie.title}" />
+            <h1>Description</h1>
+            <p th:text="${movie.description}"></p>
+            <a th:href="@{/cart?add={id}(id = ${movie.movieId})}">
+                <img th:src="@{/css/images/add.png}" th:alt="${movie.title}" width="150" height="50" />
+            </a>
+            <a th:href="@{/cart?del={id}(id = ${movie.movieId})}">
+                <img th:src="@{/css/images/remove.png}" th:alt="${movie.title}" width="150" height="50"/>
+            </a>
+        </div>
+    </div>
+    <!-- end Main -->
+
+    <!-- Footer -->
+    <div id="footer">
+        <p> &copy; 2020 Ticket Plus, LLC. All Rights Reserved.</p>
+    </div>
+    <!-- end Footer -->
+</div>
+<!-- end Shell -->
+</body>
+</html>
