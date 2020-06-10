@@ -28,20 +28,56 @@ public class HomeController
         return "index";
     }
     @GetMapping("/search")
-    public String search(Model model)
+    public String search(@RequestParam(name="search", required=true)long id, Model model)
     {
         System.out.println("* MovieController.findAll:");
-        List<Movie> allMovies = service.findAll();
-        model.addAttribute("entries", allMovies);
-        return "index";
+        Movie movie = service.findById(id);
+        Cart cart = cartService.findById(id);
+        Long quantity = 0L;
+        if (cart != null)
+        {
+            quantity = cart.getQuantity();
+        }
+        model.addAttribute("title", movie.getTitle());
+        model.addAttribute("movie", movie);
+        model.addAttribute("quantity", quantity);
+        return "search";
     }
     @GetMapping("/view")
     public String view(@RequestParam(name="id", required=true) long id, Model model)
     {
         Movie movie = service.findById(id);
+        Cart cart = cartService.findById(id);
+        Long quantity = 0L;
+        if (cart != null)
+        {
+            quantity = cart.getQuantity();
+        }
         model.addAttribute("title", movie.getTitle());
         model.addAttribute("movie", movie);
+        model.addAttribute("quantity", quantity);
+
         return "view";
+    }
+    @GetMapping("/checkout")
+    public String checkout(@RequestParam(name="price", required=true) double price,
+                           @RequestParam(name="coupon", required = false) String coupon, Model model)
+    {
+        if(coupon.equalsIgnoreCase("SITE"))
+        {
+            price = price * 0.80;
+            model.addAttribute("coupon","Applied 20% discount!");
+        }
+        else if(coupon=="")
+        {
+            model.addAttribute("coupon","No Coupon Applied!");
+        }
+        else
+        {
+            model.addAttribute("coupon","Invalid Coupon!");
+        }
+        model.addAttribute("total", price);
+        return "checkout";
     }
     @GetMapping("/news")
     public String news(Model model)
@@ -57,8 +93,11 @@ public class HomeController
         if(add !=null)
         {
             Movie movie = service.findById(Long.parseLong(add));
-            Cart cart = new Cart(movie.getMovieId(),movie.getTitle(),movie.getImage(),1);
-            cartService.add(cart);
+            if(Long.parseLong(quantity) > 0)
+            {
+                Cart cart = new Cart(movie.getMovieId(),movie.getTitle(),movie.getImage(),Long.parseLong(quantity));
+                cartService.add(cart);
+            }
         }
         else if(del !=null)
         {
@@ -73,7 +112,14 @@ public class HomeController
         }
         System.out.println("* CartController.findAll:");
         List<Cart> carts = cartService.findAll();
+        float total = 0;
+        for (Cart cart:carts)
+        {
+            total = total + cart.getPrice();
+        }
         model.addAttribute("entries", carts);
+        model.addAttribute("total", total);
         return "cart";
     }
+
 }

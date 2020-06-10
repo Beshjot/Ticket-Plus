@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <title>Cart</title>
+    <title>Checkout</title>
 </head>
 <body>
 <div id="shell">
@@ -24,6 +24,7 @@
         <div id="sub-navigation">
             <ul>
                 <li><a href="/">SHOW ALL</a></li>
+                <!--<li><a href="#">MOST COMMENTED</a></li>-->
             </ul>
             <div id="search">
                 <form action="search" method="get" accept-charset="utf-8">
@@ -42,25 +43,8 @@
     <div id="main">
         <!-- Content -->
         <div id="content">
-            <div th:each="entry : *{entries}">
-                <h1 th:text="${entry.title}"></h1>
-                <img th:src="${entry.image}" th:alt="${entry.title}" />
-                <form th:action="@{/cart}" method="get">
-                    <div class="price" th:text="@{Price: {id}(id = ${entry.price})}"></div>
-                    Quantity: <input name="quantity" th:value="${entry.quantity}"/>
-                    <input type="hidden" name="movieid" th:value="${entry.movieId}"/>
-                    <input type="submit" value="Edit" class="button button5"/>
-                    <a th:href="@{/cart?del={id}(id = ${entry.movieId})}">
-                        <p class="button button5">Delete from Cart</p>
-                    </a>
-                </form>
-            </div>
-            <div class="price" th:text="@{Total: {id}(id = ${total})}"></div>
-            <form th:action="@{/checkout}" method="get">
-                Coupon: <input name="coupon"/>
-                <input type="hidden" name="price" th:value="${total}"/>
-                <input type="submit" value="Checkout" class="button button5"/>
-            </form>
+            <div class="price" th:text="${coupon}"></div>
+            <div class="price" th:text="@{Thank You for paying: {id}(id = ${total})}"></div>
         </div>
     </div>
     <!-- end Main -->

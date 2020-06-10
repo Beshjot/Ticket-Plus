@@ -20,8 +20,14 @@ public class MovieServiceImpl implements MovieService
 
     @Override
     public Movie findById(long id) {
-        System.out.println("* MovieService.findByIdt: " + id);
+        System.out.println("* MovieService.findById: " + id);
         return dao.findById(id);
+    }
+
+    @Override
+    public Movie findBytitle(String movie) {
+        System.out.println("* MovieService.findByMovie: " + movie);
+        return dao.findBytitle(movie);
     }
 
     @Override

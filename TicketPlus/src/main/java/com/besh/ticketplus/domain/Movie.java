@@ -17,18 +17,21 @@ public class Movie
     private String image;
     @Column
     private String trailer;
+    @Column
+    private float price;
 
-    public Movie(long movieId, String title, String description, String image, String trailer) {
+    Movie()
+    {
+
+    }
+
+    public Movie(long movieId, String title, String description, String image, String trailer, float price) {
         this.movieId = movieId;
         this.title = title;
         this.description = description;
         this.image = image;
         this.trailer = trailer;
-    }
-
-    public Movie()
-    {
-
+        this.price = price;
     }
 
     public long getMovieId() {
@@ -63,6 +66,22 @@ public class Movie
         this.image = image;
     }
 
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -71,14 +90,7 @@ public class Movie
                 ", description='" + description + '\'' +
                 ", image='" + image + '\'' +
                 ", trailer='" + trailer + '\'' +
+                ", price=" + price +
                 '}';
-    }
-
-    public String getTrailer() {
-        return trailer;
-    }
-
-    public void setTrailer(String trailer) {
-        this.trailer = trailer;
     }
 }

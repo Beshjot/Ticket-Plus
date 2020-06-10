@@ -69,4 +69,15 @@ public class MovieDaoDatabaseImpl implements MovieDao
         }
         return  false;
     }
+
+    @Override
+    public Movie findBytitle(String movie) {
+        System.out.println("MovieDaoDatabaseImpl.findByMovie: " + movie);
+        Optional<Movie> result = repository.findBytitle(movie);
+        if(result.isPresent())
+        {
+            return result.get();
+        }
+        return null;
+    }
 }

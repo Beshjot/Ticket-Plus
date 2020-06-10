@@ -3,6 +3,7 @@ package com.besh.ticketplus.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Cart
@@ -14,16 +15,27 @@ public class Cart
     @Column
     private  String image;
     @Column
-    private long quantity;
+    private Long quantity;
+    @Column
+    private float price;
 
     public Cart() {
     }
 
-    public Cart(long movieId, String title, String image, long quantity) {
+    public Cart(long movieId, String title, String image, Long quantity) {
         this.movieId = movieId;
         this.title = title;
         this.image = image;
         this.quantity = quantity;
+        this.price = 20* this.getQuantity();
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public long getMovieId() {
@@ -50,11 +62,11 @@ public class Cart
         this.image = image;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 
@@ -65,6 +77,24 @@ public class Cart
                 ", title='" + title + '\'' +
                 ", image='" + image + '\'' +
                 ", quantity=" + quantity +
+                ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cart)) return false;
+        Cart cart = (Cart) o;
+        return movieId == cart.movieId &&
+                Float.compare(cart.price, price) == 0 &&
+                Objects.equals(title, cart.title) &&
+                Objects.equals(image, cart.image) &&
+                Objects.equals(quantity, cart.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movieId, title, image, quantity, price);
     }
 }

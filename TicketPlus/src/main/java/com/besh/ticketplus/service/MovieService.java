@@ -8,6 +8,7 @@ public interface MovieService
 {
     boolean add(Movie movie);
     Movie findById(long id);
+    Movie findBytitle(String movie);
     List<Movie> findAll();
     boolean delete (long id);
     boolean update (Movie updatedMovie);

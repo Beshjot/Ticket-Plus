@@ -80,3 +80,31 @@ h1#logo a { float:left; width:239px; height:49px; background:url('images/logo.pn
 #footer a:hover { color:#e44400; text-decoration:none; }
 
 #footer a:hover.designby { color:#9c9c9c; text-decoration:none; }
+div.price {font-size:20px; color:#FF0000;}
+input[type=image] {
+
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+a, u {
+    text-decoration: none;
+}
+.button {
+  border: none;
+  border-radius: 15px;
+  color: white;
+  padding-bottom: 6px;
+  padding-top: 6px;
+  width: 200px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button5 {background-color: #555555;} /* Black */

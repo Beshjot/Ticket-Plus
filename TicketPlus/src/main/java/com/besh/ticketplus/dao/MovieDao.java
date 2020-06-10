@@ -11,4 +11,5 @@ public interface MovieDao
     List<Movie> findAll();
     boolean delete (long id);
     boolean update (Movie updatedMovie);
+    Movie findBytitle(String movie);
 }
