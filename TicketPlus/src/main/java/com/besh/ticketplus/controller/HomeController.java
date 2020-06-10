@@ -2,12 +2,16 @@ package com.besh.ticketplus.controller;
 
 import com.besh.ticketplus.domain.Cart;
 import com.besh.ticketplus.domain.Movie;
+import com.besh.ticketplus.domain.News;
 import com.besh.ticketplus.service.CartService;
 import com.besh.ticketplus.service.MovieService;
+import com.besh.ticketplus.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -19,6 +23,8 @@ public class HomeController
     private MovieService service;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private NewsService newsService;
     @GetMapping("/")
     public String homepage(Model model)
     {
@@ -79,9 +85,19 @@ public class HomeController
         model.addAttribute("total", price);
         return "checkout";
     }
-    @GetMapping("/news")
-    public String news(Model model)
+    @RequestMapping(value = "/news", method={RequestMethod.POST,RequestMethod.GET})
+    public String news(@RequestParam(name="heading", required=false) String title,
+                       @RequestParam(name="details", required=false) String details,
+                       Model model)
     {
+        System.out.println("* NewsController.findAll:");
+        List<News> allNews = newsService.findAll();
+        model.addAttribute("entries", allNews);
+        if(title!=null && details!=null)
+        {
+            News news = new News(allNews.size() + 1,title,details);
+            newsService.add(news);
+        }
         return "news";
     }
     @GetMapping("/cart")

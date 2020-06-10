@@ -43,11 +43,26 @@
     <div id="main">
         <!-- Content -->
         <div id="content">
-            <h1>Angelina Jolie used to identify herself as Shiloh when she checked into hotels and Brad Pitt would call</h1>
+            <!--<h1>Angelina Jolie used to identify herself as Shiloh when she checked into hotels and Brad Pitt would call</h1>
             <p>Angelina Jolie once revealed the tale behind her daughter's name Shiloh. The actress also revealed the secret connection has a sweet Brad Pitt connection as well. </p>
             <p>About 14 years ago, Brad Pitt and Angelina Jolie decided to name their daughter Shiloh. The couple, who had already adopted three children by then, welcomed their fourth daughter and revealed her name. While the unique has become synonymous to Angie and Brad's daughter, it has been in Angelina's family for years. In an interview with Vanity Fair, the actress revealed the long and a special history associated to it. The actress first came across the name through her parents. </p>
             <p>She recalled that her parents wanted to name their firstborn Shiloh Baptist. Sadly, Angelina's mother suffered a miscarriage. While they name the actress Angelina, Angie liked the name Shiloh Baptist. "It was a name my parents almost named their first child – there was a miscarriage: Shiloh Baptist. Because my father had been shooting in Georgia and that was the most southern name [my parents] could come up with. It’s a name I always liked," she revealed. Angelina also confessed she would use the name to hide her identity at hotels. "I used to go under it in hotels: Shiloh Baptist. I’d gone under it when Brad called hotel rooms where I was staying," she said. </p>
             <p>Today, Brad is proud of the teenager Shiloh has become. Celebrating her 14th birthday a few weeks ago, sources told Entertainment Tonight that Brad was gushing about Shiloh ahead of her birthday. "Brad is so proud of Shiloh and who she has become. He loves that she always stays true to herself and is so good to her brothers and sisters," the grapevine revealed. "Brad's kids are the most important thing to him. He tells his friends he learns so much about life from his own children," the source added. </p>
+            -->
+            <div th:each="entry : *{entries}">
+                <h1 th:text="${entry.title}"></h1>
+                <p th:text="${entry.details}" />
+            </div>
+            <div>
+                <span></span>
+                <h1>Add News</h1>
+                <form action="/news" method="post">
+                    <input type="text" name="heading" value="Heading"/><br/>
+                    <textarea rows = "5" cols = "60" name="details">Details...
+                    </textarea>
+                    <input type="submit" value="Add news" class="button button5"/>
+                </form>
+            </div>
         </div>
     </div>
     <!-- end Main -->

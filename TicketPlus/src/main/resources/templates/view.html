@@ -52,7 +52,6 @@
             <form th:action="@{/cart?add={id}(id = ${movie.movieId})}" method="get">
                 Quantity: <input name="quantity" th:value="${quantity}"/>
                 <input type="hidden" name="add" th:value="${movie.movieId}"/>
-                <!--<input type="image" th:src="@{/css/images/addtocart.png}" alt="Submit">-->
                 <input type="submit" value="Add to Cart" class="button button5"/>
             </form>
         </div>
